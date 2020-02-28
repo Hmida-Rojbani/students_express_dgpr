@@ -44,7 +44,7 @@ app.post('/api/students', (req,res)=>{
         age: req.body.age
     };
     students.push(student);
-    res.send(student);
+    res.status(201).send(student);
 });
 
 app.listen(port, ()=> console.log(`Listenning on ${port}....`))
