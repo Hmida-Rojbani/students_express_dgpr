@@ -1,11 +1,13 @@
 const express = require('express');
 const Joi = require('joi');
-const logger = require('./logger');
+var morgan = require('morgan');
 const app = express();
 const port = 3000;
 app.use(express.json());
-app.use(logger);
+console.log(app.get('env'));
 
+if(app.get('env')==='development') 
+    app.use(morgan('dev'));
 var students = [
     {id: 1, name: 'student1', age: 22},
     {id: 2, name: 'student2', age: 25},
