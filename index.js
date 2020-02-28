@@ -2,13 +2,15 @@ const express = require('express');
 const Joi = require('joi');
 const morgan = require('morgan');
 const config = require('config');
+const appStart = require('debug')('app:start');
+const appDebug = require('debug')('app:debug');
 const app = express();
 const port = 3000;
 app.use(express.json());
-console.log(app.get('env'));
+appStart(app.get('env'));
 
-console.log('App Name : ',config.get('name'));
-console.log(`Using DB : ${config.get('db.host')}/user=${config.get('db.login')}&pass=${config.get('db.password')}`)
+appStart('App Name : ',config.get('name'));
+appDebug(`Using DB : ${config.get('db.host')}/user=${config.get('db.login')}&pass=${config.get('db.password')}`)
 
 if(app.get('env')==='development') 
     app.use(morgan('dev'));
@@ -85,4 +87,4 @@ app.put('/api/students/:id', (req, res) => {
         
 });
 
-app.listen(port, ()=> console.log(`Listenning on ${port}....`))
+app.listen(port, ()=> appDebug(`Listenning on ${port}....`))
