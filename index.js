@@ -1,8 +1,10 @@
 const express = require('express');
 const Joi = require('joi');
+const logger = require('./logger');
 const app = express();
 const port = 3000;
 app.use(express.json());
+app.use(logger);
 
 var students = [
     {id: 1, name: 'student1', age: 22},
